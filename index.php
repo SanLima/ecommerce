@@ -8,7 +8,7 @@ $app->config('debug', true);
 
 $app->get('/', function() {
 
-	$sql = new Hcode\DB\Sql();
+	$sql = new Apsys\DB\Sql();
   $res = $sql->select("SELECT * FROM tb_users");
   echo json_encode($res);
 
