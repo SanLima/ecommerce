@@ -1,5 +1,8 @@
 <?php
-
+/*
+127.0.0.1       comercio.com.br
+127.0.0.2       sandro.com.br
+*/
 require_once("vendor/autoload.php");
 
 use \Slim\Slim;
