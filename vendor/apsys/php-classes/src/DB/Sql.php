@@ -44,6 +44,7 @@ class Sql {
 	{
 
 		$stmt = $this->conn->prepare($rawQuery);
+		//$stmt->pdo->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING );
 
 		$this->setParams($stmt, $params);
 
