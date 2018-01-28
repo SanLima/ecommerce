@@ -5,8 +5,8 @@ use Rain\Tpl;
 
 
 Class Mailer {
-    const USERNAME = "sanlima@gmail.com";
-    const USERPASS = "poiuyewkjyy%";
+    const USERNAME = "";
+    const USERPASS = "";
     const NAME_FROM= "Project ecommerce.UAU";
 
     private $mail;
