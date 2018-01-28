@@ -80,6 +80,7 @@ class User extends Model {
     $this->setData($res[0]);
 
   }
+
   public function get($iduser)
   {
     $sql = new Sql();

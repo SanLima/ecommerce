@@ -10,6 +10,7 @@ use \Slim\Slim;
 use  Apsys\Page;
 use Apsys\PageAdmin;
 use Apsys\Model\User;
+use Apsys\Model\Category;
 
 $app = new Slim();
 
@@ -203,6 +204,95 @@ $app->post('/admin/forgot/reset', function(){
 		$page->setTpl("forgot-reset-success");
 
 });
+
+$app->get("/admin/categories", function(){
+
+	User::VerifyLogin();
+
+	$categories = Category::listAll();
+
+	$page = new PageAdmin();
+
+	$page->setTpl("categories", [
+		"categories"=>$categories
+	]);
+
+});
+
+$app->get("/admin/categories/create", function(){
+
+	User::VerifyLogin();
+
+	$page = new PageAdmin();
+
+	$page->setTpl("categories-create");
+
+});
+
+$app->post("/admin/categories/create", function(){
+
+	User::VerifyLogin();
+
+	$categories = new Category();
+
+	$categories ->setData($_POST);
+
+	$categories->save();
+
+	header('Location: /admin/categories');
+	exit;
+
+});
+
+
+$app->get('/admin/categories/:idcategory/delete', function($idcategory){
+
+	User::VerifyLogin();
+
+	$category = new Category();
+
+	$category->get((int)$idcategory);
+
+	$category->delete();
+
+	header('Location: /admin/categories');
+	exit;
+
+});
+
+
+$app->get('/admin/categories/:idcategory', function($idcategory){
+
+	User::VerifyLogin();
+
+	$category = new Category();
+
+	$category->get((int)$idcategory);
+
+	$page = new PageAdmin();
+
+	$page->setTpl("categories-update", [
+		"category"=>$category->getValues()
+	]);
+
+});
+
+$app->post('/admin/categories/:idcategory', function($idcategory){
+
+	User::VerifyLogin();
+
+	$category = new Category();
+
+	$category->get((int)$idcategory);
+
+	$category->setData($_POST);
+
+	$category->save();
+
+	header('Location: /admin/categories');
+	exit;
+});
+
 
 $app->run();
  ?>
